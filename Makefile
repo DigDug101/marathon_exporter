@@ -1,5 +1,5 @@
 VERSION  := $$(git describe --tags --always)
-TARGET   := marathon_exporter
+TARGET   := ads-marathon-exporter
 TEST     ?= ./...
 
 default: test build
@@ -15,12 +15,12 @@ release: clean
 		-a -tags netgo \
 		-ldflags "-X main.Version=$(VERSION)" \
 		-o bin/$(TARGET) .
-	docker build -t gettyimages/$(TARGET):$(VERSION) .
+	docker build -t quay.io/reddit/$(TARGET):$(VERSION) .
 
 publish: release
-	docker push gettyimages/$(TARGET):$(VERSION)
-	docker tag gettyimages/$(TARGET):$(VERSION) gettyimages/$(TARGET):latest
-	docker push gettyimages/$(TARGET):latest
+	docker push quay.io/reddit/$(TARGET):$(VERSION)
+	docker tag quay.io/reddit/$(TARGET):$(VERSION) quay.io/reddit/$(TARGET):latest
+	docker push quay.io/reddit/$(TARGET):latest
 
 clean:
 	rm -rf bin/

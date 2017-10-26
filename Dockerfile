@@ -1,7 +1,5 @@
-FROM scratch
-MAINTAINER Getty Images "https://github.com/gettyimages"
+FROM golang:1.9
+MAINTAINER Reddit "https://github.com/reddit"
 
-ADD bin/marathon_exporter /marathon_exporter
+ADD bin/ads-marathon-exporter /marathon_exporter
 ENTRYPOINT ["/marathon_exporter"]
-
-EXPOSE 9088
